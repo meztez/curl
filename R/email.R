@@ -117,9 +117,9 @@ send_mail <- function(mail_from, mail_rcpt, message, smtp_server = 'smtp://local
         cat(sprintf("\rUploaded %.0f bytes... all done!\n", total_bytes), file = stderr())
       }
     }
-    close(con)
     return(buf)
   }, mail_from = mail_from, mail_rcpt = mail_rcpt, use_ssl = use_ssl,
       verbose = verbose, ...)
   curl_fetch_memory(smtp_server, handle = h)
+  close(con)
 }
