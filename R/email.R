@@ -106,7 +106,6 @@ send_mail <- function(mail_from, mail_rcpt, message, smtp_server = 'smtp://local
   } else {
     stop("Body must be a string, raw vector, or connection object")
   }
-  on.exit(close(con))
   total_bytes <- 0
   h <- new_handle(upload = TRUE, readfunction = function(nbytes, ...) {
     buf <- readBin(con, raw(), nbytes)
@@ -118,6 +117,7 @@ send_mail <- function(mail_from, mail_rcpt, message, smtp_server = 'smtp://local
         cat(sprintf("\rUploaded %.0f bytes... all done!\n", total_bytes), file = stderr())
       }
     }
+    close(con)
     return(buf)
   }, mail_from = mail_from, mail_rcpt = mail_rcpt, use_ssl = use_ssl,
       verbose = verbose, ...)
