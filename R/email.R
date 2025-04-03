@@ -121,4 +121,5 @@ send_mail <- function(mail_from, mail_rcpt, message, smtp_server = 'smtp://local
   }, mail_from = mail_from, mail_rcpt = mail_rcpt, use_ssl = use_ssl,
       verbose = verbose, ...)
   curl_fetch_memory(smtp_server, handle = h)
+  Sys.sleep(5)
 }
